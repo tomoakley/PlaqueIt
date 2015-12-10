@@ -1,0 +1,30 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context="com.example.tom.plaqueit.ItemListHeader">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/list_header"
+        android:text="Within 2km"
+        android:background="#D7D7D7"
+        android:textSize="16dp"
+        android:textColor="#fff"
+        android:drawableEnd="@drawable/ic_keyboard_arrow_right"
+        android:paddingLeft="20px"
+        android:paddingTop="0dp"
+        android:paddingRight="20px"
+        android:paddingBottom="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:autoText="false"
+        android:elegantTextHeight="false"
+        android:password="false"
+        android:phoneNumber="false"
+        android:gravity="center"
+        android:textAlignment="textStart"
+        android:clickable="true" />
+
+</FrameLayout>
