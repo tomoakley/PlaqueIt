@@ -26,6 +26,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         TextView plaqueTitle;
         TextView plaqueDesc;
         TextView listHeader;
+        TextView plaquePoints;
 
         /*
          * Taking the View we passed it when inflating shout_item.xml and then finding
@@ -39,6 +40,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             listHeader = (TextView) itemView.findViewById(R.id.list_header);
             plaqueTitle = (TextView) itemView.findViewById(R.id.plaque_title);
             plaqueDesc = (TextView) itemView.findViewById(R.id.plaque_description);
+            plaquePoints = (TextView) itemView.findViewById(R.id.plaque_points);
 
             plaque_item.setOnClickListener(this);
         }
@@ -47,18 +49,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public void onClick(View view) {
             if (getAdapterPosition() >= 0) {
 
-                //Getting our current context
                 Context currentContext = view.getContext();
 
-                //Creating the Intent to go to the Respond to shout screen
                 Intent showPlaquePage = new Intent(currentContext, plaquePage.class);
 
-                //adding data to pass to respond screen
                 int position = getAdapterPosition();
                 showPlaquePage.putExtra("title", plaques.get(position).title);
                 showPlaquePage.putExtra("description", plaques.get(position).description);
+                showPlaquePage.putExtra("points", plaques.get(position).points);
 
-                //start the respond to shout activity
                 currentContext.startActivity(showPlaquePage);
             }
         }
@@ -80,6 +79,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(final PlaqueViewHolder plaqueViewHolder, final int i) {
         plaqueViewHolder.plaqueTitle.setText(plaques.get(i).title);
         plaqueViewHolder.plaqueDesc.setText(plaques.get(i).description);
+        plaqueViewHolder.plaquePoints.setText(plaques.get(i).points);
     }
 
 

@@ -7,10 +7,12 @@ public class Plaque {
 
     String title;
     String description;
+    String points;
 
-    Plaque(String title, String description) {
+    Plaque(String title, String description, String points) {
         this.title = title;
         this.description = description;
+        this.points = points;
     }
 
 }

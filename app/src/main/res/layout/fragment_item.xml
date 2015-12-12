@@ -38,19 +38,42 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Small Text"
             android:id="@+id/plaque_description"
-            android:layout_marginLeft="15dp"
-            android:layout_alignStart="@+id/button" />
+            android:layout_below="@+id/plaque_title"
+            android:layout_alignStart="@+id/plaque_title" />
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:id="@+id/star_icon"
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/plaque_description"
+        android:src="@drawable/star" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="20 Points"
+        android:id="@+id/plaque_points"
+        android:layout_marginStart="10dp"
+        android:layout_alignTop="@+id/star_icon"
+        android:layout_toEndOf="@+id/star_icon"
+        android:layout_alignWithParentIfMissing="false"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentLeft="false"
+        android:layout_marginTop="2dp"
+        android:textColor="#FCBE17" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Take me there"
+            android:text="View more details"
             android:id="@+id/button"
-            android:drawableEnd="@drawable/ic_directions"
             android:background="@color/colorPrimary"
             android:textColor="#fff"
             android:gravity="center|center_vertical"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:layout_toEndOf="@+id/imageView" />
-    </RelativeLayout>
+
+</RelativeLayout>

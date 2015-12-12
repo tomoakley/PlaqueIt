@@ -57,10 +57,8 @@ public class ItemFragment extends Fragment {
     // Define items from layout
     TextView plaqueTitle;
     TextView plaqueDescription;
+    TextView plaquePoints;
     RelativeLayout plaqueItem;
-
-    String titleText;
-    String descText;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -80,17 +78,6 @@ public class ItemFragment extends Fragment {
 
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        // set items from view
-        plaqueItem = (RelativeLayout)view.findViewById(R.id.plaque_item);
-        plaqueTitle = (TextView)view.findViewById(R.id.plaque_title);
-        plaqueDescription = (TextView)view.findViewById(R.id.plaque_description);
-
-        Bundle bundle = this.getArguments();
-        String title = bundle.getString("title");
-        String description = bundle.getString("description");
-        plaqueTitle.setText(title);
-        plaqueDescription.setText(description);
     }
 
 

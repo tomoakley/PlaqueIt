@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.example.tom.plaqueit.ItemPage"
     android:orientation="vertical">
 
     <include
@@ -32,14 +31,61 @@
         android:layout_marginBottom="10dp"
         android:id="@+id/plaque_title" />
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/imageView"
+        android:layout_alignParentStart="true"
+        android:id="@+id/plaque_info_bar"
+        android:background="#fff"
+        android:elevation="4dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/imageView3"
+            android:src="@drawable/star" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="20 points"
+            android:id="@+id/plaque_points"
+            android:paddingLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:textColor="#FCBE17"
+            android:layout_marginRight="150dp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView4"
+            android:src="@drawable/ic_favorite"
+            android:layout_marginTop="5dp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView5"
+            android:src="@drawable/ic_share"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"/>
+    </LinearLayout>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Medium Text"
         android:id="@+id/plaque_description"
-        android:layout_below="@+id/imageView"
-        android:layout_alignStart="@+id/plaque_title"
+        android:layout_below="@+id/plaque_info_bar"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="30dp" />
 
     <Button

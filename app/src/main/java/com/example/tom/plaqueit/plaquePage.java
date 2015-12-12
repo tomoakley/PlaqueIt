@@ -13,8 +13,10 @@ public class plaquePage extends AppCompatActivity {
     Bundle bundle;
     String title;
     String description;
+    String points;
     TextView plaqueTitle;
     TextView plaqueDesc;
+    TextView plaquePoints;
     Toolbar appBar;
 
     @Override
@@ -25,9 +27,11 @@ public class plaquePage extends AppCompatActivity {
         bundle = getIntent().getExtras();
         title = bundle.getString("title");
         description = bundle.getString("description");
+        points = bundle.getString("points");
 
         plaqueTitle = (TextView) findViewById(R.id.plaque_title);
         plaqueDesc = (TextView) findViewById(R.id.plaque_description);
+        plaquePoints = (TextView) findViewById(R.id.plaque_points);
         appBar = (Toolbar) findViewById(R.id.app_bar);
 
         setSupportActionBar(appBar);
@@ -38,6 +42,7 @@ public class plaquePage extends AppCompatActivity {
 
         plaqueTitle.setText(title);
         plaqueDesc.setText(description);
+        plaquePoints.setText(points);
 
     }
 }

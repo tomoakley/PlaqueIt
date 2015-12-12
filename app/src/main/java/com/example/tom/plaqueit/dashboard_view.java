@@ -22,10 +22,9 @@ public class dashboard_view extends AppCompatActivity
         implements ItemList.OnFragmentInteractionListener, ItemFragment.OnFragmentInteractionListener,
         ItemListHeader.OnFragmentInteractionListener, Map.OnFragmentInteractionListener {
 
-    private RecyclerView recyclerView;
+    // private RecyclerView recyclerView;
     StickyRecyclerHeadersAdapter mAdapter;
-    List<Plaque> within2kmPlaques;
-    List<Plaque> within5kmPlaques;
+    static List<Plaque> plaques;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,19 +32,15 @@ public class dashboard_view extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard_view);
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         Toolbar appBar = (Toolbar) findViewById(R.id.app_bar);
         ViewPager vPager = (ViewPager) findViewById(R.id.pager);
         TabLayout mTabs = (TabLayout) findViewById(R.id.tabs);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         setSupportActionBar(appBar);
         vPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager(), getApplicationContext()));
         mTabs.setupWithViewPager(vPager);
 
         initializeData();
-        initializeAdapter();
     }
 
     @Override
@@ -55,27 +50,19 @@ public class dashboard_view extends AppCompatActivity
     }
 
     public void initializeData() {
-        within2kmPlaques = new ArrayList<>();
-        within2kmPlaques.add(new Plaque("Plaque 1", "Plaque 1 Description"));
-        within2kmPlaques.add(new Plaque("Plaque 2", "Plaque 2 Description"));
-        within2kmPlaques.add(new Plaque("Plaque 1", "Plaque 1 Description"));
-        within2kmPlaques.add(new Plaque("Plaque 2", "Plaque 2 Description"));
-        within2kmPlaques.add(new Plaque("Plaque 1", "Plaque 1 Description"));
-        within2kmPlaques.add(new Plaque("Plaque 2", "Plaque 2 Description"));
-        within2kmPlaques.add(new Plaque("Plaque 1", "Plaque 1 Description"));
-        within2kmPlaques.add(new Plaque("Plaque 2", "Plaque 2 Description"));
-        within2kmPlaques.add(new Plaque("Plaque 1", "Plaque 1 Description"));
-        within2kmPlaques.add(new Plaque("Plaque 2", "Plaque 2 Description"));
-        within2kmPlaques.add(new Plaque("Plaque 1", "Plaque 1 Description"));
-        within2kmPlaques.add(new Plaque("Plaque 2", "Plaque 2 Description"));
-
-    }
-
-    private void initializeAdapter() {
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(within2kmPlaques);
-        recyclerView.setAdapter(adapter);
-        final StickyRecyclerHeadersDecoration headersDecor = new StickyRecyclerHeadersDecoration(adapter);
-        recyclerView.addItemDecoration(headersDecor);
+        plaques = new ArrayList<>();
+        plaques.add(new Plaque("Plaque 1", "Plaque 1 Description", "15 points"));
+        plaques.add(new Plaque("Plaque 2", "Plaque 2 Description", "25 points"));
+        plaques.add(new Plaque("Plaque 3", "Plaque 3 Description", "5 points"));
+        plaques.add(new Plaque("Plaque 4", "Plaque 4 Description", "20 points"));
+        plaques.add(new Plaque("Plaque 5", "Plaque 5 Description", "30 points"));
+        plaques.add(new Plaque("Plaque 6", "Plaque 6 Description", "10 points"));
+        plaques.add(new Plaque("Plaque 7", "Plaque 7 Description", "25 points"));
+        plaques.add(new Plaque("Plaque 8", "Plaque 8 Description", "30 points"));
+        plaques.add(new Plaque("Plaque 9", "Plaque 9 Description", "10 points"));
+        plaques.add(new Plaque("Plaque 10", "Plaque 10 Description", "15 points"));
+        plaques.add(new Plaque("Plaque 11", "Plaque 11 Description", "20 points"));
+        plaques.add(new Plaque("Plaque 12", "Plaque 12 Description", "10 points"));
     }
 
     public void onFragmentInteraction(Uri uri) {
