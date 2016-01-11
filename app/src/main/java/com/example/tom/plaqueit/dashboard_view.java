@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class dashboard_view extends AppCompatActivity
         implements ItemList.OnFragmentInteractionListener, ItemFragment.OnFragmentInteractionListener,
-        ItemListHeader.OnFragmentInteractionListener, Map.OnFragmentInteractionListener {
+        Map.OnFragmentInteractionListener {
 
     static ArrayList<Plaque> plaques;
 

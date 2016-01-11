@@ -12,8 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.tom.plaqueit.StickyHeadersRecyclerView.StickyRecyclerHeadersDecoration;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,10 +19,9 @@ import com.example.tom.plaqueit.StickyHeadersRecyclerView.StickyRecyclerHeadersD
  * {@link ItemList.OnFragmentInteractionListener} interface
  * to handle interaction events.
  */
-public class ItemList extends Fragment implements ItemFragment.OnFragmentInteractionListener, ItemListHeader.OnFragmentInteractionListener {
+public class ItemList extends Fragment implements ItemFragment.OnFragmentInteractionListener {
 
     private OnFragmentInteractionListener mListener;
-    private RecyclerView recyclerView;
     private AppBarLayout toolbar;
 
     public ItemList() {
@@ -38,13 +35,14 @@ public class ItemList extends Fragment implements ItemFragment.OnFragmentInterac
 
         View inflatedView = inflater.inflate(R.layout.fragment_item_list, container, false);
 
-        recyclerView = (RecyclerView) inflatedView.findViewById(R.id.recyclerView);
+        RecyclerView recyclerView = (RecyclerView) inflatedView.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setNestedScrollingEnabled(true);
 
         toolbar = (AppBarLayout) getActivity().findViewById(R.id.toolbar);
 
-        initializeAdapter();
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(dashboard_view.plaques);
+        recyclerView.setAdapter(adapter);
 
         Context currentContext = inflatedView.getContext();
 
@@ -57,14 +55,6 @@ public class ItemList extends Fragment implements ItemFragment.OnFragmentInterac
 
         return inflatedView;
     }
-
-    private void initializeAdapter() {
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(dashboard_view.plaques);
-        recyclerView.setAdapter(adapter);
-        final StickyRecyclerHeadersDecoration headersDecor = new StickyRecyclerHeadersDecoration(adapter);
-        recyclerView.addItemDecoration(headersDecor);
-    }
-
 
     @Override
     public void onAttach(Activity activity) {

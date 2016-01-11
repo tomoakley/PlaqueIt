@@ -9,14 +9,12 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.tom.plaqueit.StickyHeadersRecyclerView.StickyRecyclerHeadersAdapter;
-
 import java.util.List;
 
 /**
  * Created by Tom on 08/12/2015.
  */
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.PlaqueViewHolder> implements StickyRecyclerHeadersAdapter {
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.PlaqueViewHolder> {
 
     class PlaqueViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         RelativeLayout plaque_item;
@@ -80,25 +78,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         plaqueViewHolder.plaqueTitle.setText(plaques.get(i).title);
         plaqueViewHolder.plaqueDesc.setText(plaques.get(i).description);
         plaqueViewHolder.plaquePoints.setText(plaques.get(i).points);
-    }
-
-
-    @Override
-    public long getHeaderId(int position) {
-        return 0;
-    }
-
-    @Override
-    public RecyclerView.ViewHolder onCreateHeaderViewHolder(ViewGroup parent) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_item_list_header, parent, false);
-        return new RecyclerView.ViewHolder(view) {
-        };
-    }
-
-    @Override
-    public void onBindHeaderViewHolder(RecyclerView.ViewHolder holder, int position) {
-
     }
 
     @Override
