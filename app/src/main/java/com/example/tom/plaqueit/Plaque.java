@@ -8,11 +8,15 @@ public class Plaque {
     String title;
     String description;
     String points;
+    Double latitude;
+    Double longtitude;
 
-    Plaque(String title, String description, String points) {
+    Plaque(String title, String description, String points, Double latitude, Double longtitude) {
         this.title = title;
         this.description = description;
         this.points = points;
+        this.latitude = latitude;
+        this.longtitude = longtitude;
     }
 
 }

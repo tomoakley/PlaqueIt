@@ -10,8 +10,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.tom.plaqueit.StickyHeadersRecyclerView.StickyRecyclerHeadersAdapter;
-import com.example.tom.plaqueit.StickyHeadersRecyclerView.StickyRecyclerHeadersDecoration;
-import com.example.tom.plaqueit.StickyHeadersRecyclerView.StickyRecyclerHeadersTouchListener;
 
 import java.util.List;
 
@@ -57,6 +55,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 showPlaquePage.putExtra("title", plaques.get(position).title);
                 showPlaquePage.putExtra("description", plaques.get(position).description);
                 showPlaquePage.putExtra("points", plaques.get(position).points);
+                showPlaquePage.putExtra("latitude", plaques.get(position).latitude);
+                showPlaquePage.putExtra("longitude", plaques.get(position).longtitude);
 
                 currentContext.startActivity(showPlaquePage);
             }

@@ -3,28 +3,18 @@ package com.example.tom.plaqueit;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 
-import com.example.tom.plaqueit.StickyHeadersRecyclerView.StickyRecyclerHeadersAdapter;
-import com.example.tom.plaqueit.StickyHeadersRecyclerView.StickyRecyclerHeadersDecoration;
-import com.example.tom.plaqueit.StickyHeadersRecyclerView.StickyRecyclerHeadersTouchListener;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class dashboard_view extends AppCompatActivity
         implements ItemList.OnFragmentInteractionListener, ItemFragment.OnFragmentInteractionListener,
         ItemListHeader.OnFragmentInteractionListener, Map.OnFragmentInteractionListener {
 
-    // private RecyclerView recyclerView;
-    StickyRecyclerHeadersAdapter mAdapter;
-    static List<Plaque> plaques;
+    static ArrayList<Plaque> plaques;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,18 +41,15 @@ public class dashboard_view extends AppCompatActivity
 
     public void initializeData() {
         plaques = new ArrayList<>();
-        plaques.add(new Plaque("Plaque 1", "Plaque 1 Description", "15 points"));
-        plaques.add(new Plaque("Plaque 2", "Plaque 2 Description", "25 points"));
-        plaques.add(new Plaque("Plaque 3", "Plaque 3 Description", "5 points"));
-        plaques.add(new Plaque("Plaque 4", "Plaque 4 Description", "20 points"));
-        plaques.add(new Plaque("Plaque 5", "Plaque 5 Description", "30 points"));
-        plaques.add(new Plaque("Plaque 6", "Plaque 6 Description", "10 points"));
-        plaques.add(new Plaque("Plaque 7", "Plaque 7 Description", "25 points"));
-        plaques.add(new Plaque("Plaque 8", "Plaque 8 Description", "30 points"));
-        plaques.add(new Plaque("Plaque 9", "Plaque 9 Description", "10 points"));
-        plaques.add(new Plaque("Plaque 10", "Plaque 10 Description", "15 points"));
-        plaques.add(new Plaque("Plaque 11", "Plaque 11 Description", "20 points"));
-        plaques.add(new Plaque("Plaque 12", "Plaque 12 Description", "10 points"));
+        plaques.add(new Plaque("Plaque 1", "Plaque 1 Description", "15 points", 51.5087972, -0.1249099));
+        plaques.add(new Plaque("Plaque 2", "Plaque 2 Description", "25 points", 51.508680, -0.125500));
+        plaques.add(new Plaque("Plaque 3", "Plaque 3 Description", "5 points", 51.509826, -0.123107));
+        plaques.add(new Plaque("Plaque 4", "Plaque 4 Description", "20 points", 51.507616, -0.125177));
+        plaques.add(new Plaque("Plaque 5", "Plaque 5 Description", "30 points", 51.507513, -0.125212));
+    }
+
+    public ArrayList<Plaque> getPlaques() {
+        return plaques;
     }
 
     public void onFragmentInteraction(Uri uri) {

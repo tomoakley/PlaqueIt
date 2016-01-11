@@ -3,11 +3,24 @@ package com.example.tom.plaqueit;
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -15,44 +28,79 @@ import android.view.ViewGroup;
  * {@link Map.OnFragmentInteractionListener} interface
  * to handle interaction events.
  */
-public class Map extends Fragment {
+
+public class Map extends SupportMapFragment implements OnMapReadyCallback {
 
     private OnFragmentInteractionListener mListener;
+    TextView plaqueMapTitle;
+    TextView plaqueMapDesc;
+    RelativeLayout plaqueMapData;
+    ArrayList<Plaque> plaques = new ArrayList<>();
+    String markerTitle;
 
     public Map() {
         // Required empty public constructor
     }
 
+    public void createMapPlaques(GoogleMap map, ArrayList<Plaque> plaques) {
+        Iterator<Plaque> iterator = plaques.iterator();
+        Plaque plaque;
+        while(iterator.hasNext()) {
+            plaque = iterator.next();
+            LatLng position = new LatLng(plaque.latitude, plaque.longtitude);
+            map.addMarker(new MarkerOptions()
+                    .position(position)
+                    .title(plaque.title));
+        }
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
+        plaqueMapTitle = (TextView) getView().findViewById(R.id.map_location_name);
+        plaqueMapData = (RelativeLayout) getView().findViewById(R.id.plaque_map_data);
+        plaqueMapDesc = (TextView) getView().findViewById(R.id.map_location_desc);
+
+        // Get the data defined in the main activity (dashboard_view.java) and create map markers from it
+        com.example.tom.plaqueit.dashboard_view activity = (com.example.tom.plaqueit.dashboard_view) getActivity();
+        plaques = activity.getPlaques();
+        createMapPlaques(googleMap, plaques);
+
+        // Build camera position
+        LatLng camera = new LatLng(51.508357, -0.124365);
+        CameraPosition cameraPosition = new CameraPosition.Builder()
+                .target(camera)
+                .zoom(17).build();
+
+        googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                plaqueMapData.setVisibility(View.VISIBLE);
+                markerTitle = marker.getTitle();
+                plaqueMapTitle.setText(markerTitle);
+                return false;
+            }
+
+        });
+
+        // Zoom in and animate the camera
+        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        SupportMapFragment supportMapFragment = (SupportMapFragment) getChildFragmentManager()
+                .findFragmentById(R.id.map);
+        supportMapFragment.getMapAsync(this);
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        super.onCreateView(inflater, container, savedInstanceState);
         return inflater.inflate(R.layout.fragment_map, container, false);
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            mListener = (OnFragmentInteractionListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
     }
 
     /**

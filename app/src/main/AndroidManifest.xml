@@ -20,6 +20,13 @@
             android:parentActivityName="com.example.tom.plaqueit.dashboard_view">
         </activity>
 
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBJQtx_Z2QTsEUMCM2wpgyFKLY9N7qPEr8" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
     </application>
 
 </manifest>
