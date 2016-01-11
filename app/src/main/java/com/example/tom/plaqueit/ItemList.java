@@ -1,10 +1,8 @@
 package com.example.tom.plaqueit;
 
 import android.app.Activity;
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,7 +20,6 @@ import android.view.ViewGroup;
 public class ItemList extends Fragment implements ItemFragment.OnFragmentInteractionListener {
 
     private OnFragmentInteractionListener mListener;
-    private AppBarLayout toolbar;
 
     public ItemList() {
         // Required empty public constructor
@@ -39,19 +36,8 @@ public class ItemList extends Fragment implements ItemFragment.OnFragmentInterac
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setNestedScrollingEnabled(true);
 
-        toolbar = (AppBarLayout) getActivity().findViewById(R.id.toolbar);
-
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(dashboard_view.plaques);
         recyclerView.setAdapter(adapter);
-
-        Context currentContext = inflatedView.getContext();
-
-        recyclerView.addOnScrollListener(new ScrollListener(currentContext) {
-            @Override
-            public void onMoved(int distance) {
-                toolbar.setTranslationY(-distance);
-            }
-        });
 
         return inflatedView;
     }

@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -21,7 +22,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         //Creating variables for holding the items that will be in the CardViews
         TextView plaqueTitle;
         TextView plaqueDesc;
-        TextView listHeader;
+        Button plaqueButton;
         TextView plaquePoints;
 
         /*
@@ -33,12 +34,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         PlaqueViewHolder(View itemView) {
             super(itemView);
             plaque_item = (RelativeLayout) itemView.findViewById(R.id.plaque_item);
-            listHeader = (TextView) itemView.findViewById(R.id.list_header);
             plaqueTitle = (TextView) itemView.findViewById(R.id.plaque_title);
             plaqueDesc = (TextView) itemView.findViewById(R.id.plaque_description);
             plaquePoints = (TextView) itemView.findViewById(R.id.plaque_points);
+            plaqueButton = (Button) itemView.findViewById(R.id.plaque_button);
 
-            plaque_item.setOnClickListener(this);
+            plaqueButton.setOnClickListener(this);
         }
 
         @Override
