@@ -19,7 +19,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     class PlaqueViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         RelativeLayout plaque_item;
-        //Creating variables for holding the items that will be in the CardViews
         TextView plaqueTitle;
         TextView plaqueDesc;
         Button plaqueButton;
@@ -37,9 +36,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             plaqueTitle = (TextView) itemView.findViewById(R.id.plaque_title);
             plaqueDesc = (TextView) itemView.findViewById(R.id.plaque_description);
             plaquePoints = (TextView) itemView.findViewById(R.id.plaque_points);
-            plaqueButton = (Button) itemView.findViewById(R.id.plaque_button);
 
-            plaqueButton.setOnClickListener(this);
+            plaque_item.setOnClickListener(this);
         }
 
         @Override

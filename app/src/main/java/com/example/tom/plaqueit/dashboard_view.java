@@ -30,22 +30,19 @@ public class dashboard_view extends AppCompatActivity
         vPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager(), getApplicationContext()));
         mTabs.setupWithViewPager(vPager);
 
-        initializeData();
+        // initializeData();
+
+        Plaques plaqueList = new Plaques(this);
+        plaques = new ArrayList<>();
+        for (int i = 1; i < 20; i++) {
+            plaques.add(plaqueList.getPlaqueByID(i));
+        }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_main_actions, menu);
         return super.onCreateOptionsMenu(menu);
-    }
-
-    public void initializeData() {
-        plaques = new ArrayList<>();
-        plaques.add(new Plaque("Plaque 1", "Plaque 1 Description", "15 points", 51.5087972, -0.1249099));
-        plaques.add(new Plaque("Plaque 2", "Plaque 2 Description", "25 points", 51.508680, -0.125500));
-        plaques.add(new Plaque("Plaque 3", "Plaque 3 Description", "5 points", 51.509826, -0.123107));
-        plaques.add(new Plaque("Plaque 4", "Plaque 4 Description", "20 points", 51.507616, -0.125177));
-        plaques.add(new Plaque("Plaque 5", "Plaque 5 Description", "30 points", 51.507513, -0.125212));
     }
 
     public ArrayList<Plaque> getPlaques() {

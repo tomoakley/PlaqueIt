@@ -16,10 +16,9 @@
             android:layout_width="110dp"
             android:layout_height="match_parent"
             android:id="@+id/imageView"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
             android:background="#ccc"
-            android:layout_marginRight="0dp" />
+            android:layout_marginRight="0dp"
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -39,15 +38,24 @@
             android:text="Small Text"
             android:id="@+id/plaque_description"
             android:layout_below="@+id/plaque_title"
-            android:layout_alignStart="@+id/plaque_title" />
+            android:layout_alignStart="@+id/plaque_title"
+            android:layout_alignParentEnd="true" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/plaque_description"
+        android:layout_marginBottom="10dp"
+        android:background="#fff">
 
     <ImageView
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:id="@+id/star_icon"
-        android:layout_centerVertical="true"
-        android:layout_alignStart="@+id/plaque_description"
-        android:src="@drawable/star" />
+        android:src="@drawable/star"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/plaque_description" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -64,16 +72,39 @@
         android:layout_marginTop="2dp"
         android:textColor="#FCBE17" />
 
-        <Button
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#ccc"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentEnd="false"
+        android:layout_toRightOf="@+id/plaque_points"
+        android:layout_alignBottom="@+id/star_icon"
+        android:layout_marginLeft="30dp"
+        android:layout_alignTop="@+id/star_icon"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="1dp"
+        android:paddingBottom="1dp">
+        <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="View more details"
-            android:id="@+id/plaque_button"
-            android:background="@color/colorPrimary"
+            android:layout_height="match_parent"
+            android:id="@+id/nav_icon"
+            android:layout_centerVertical="true"
+            android:layout_alignStart="@+id/plaque_description"
+            android:src="@drawable/ic_navigation" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="1km"
+            android:id="@+id/distance_to_plaque"
+            android:layout_alignWithParentIfMissing="false"
             android:textColor="#fff"
-            android:gravity="center|center_vertical"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_toEndOf="@+id/imageView" />
+            android:layout_alignBottom="@+id/star_icon"
+            android:layout_toEndOf="@+id/plaque_title" />
+    </LinearLayout>
+    </LinearLayout>
 
 </RelativeLayout>

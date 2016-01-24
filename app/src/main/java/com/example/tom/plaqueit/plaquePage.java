@@ -49,6 +49,7 @@ public class plaquePage extends AppCompatActivity {
         setSupportActionBar(appBar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+        System.out.println("Lat: " + latitude + ", Long: " + longitude);
 
         plaqueTitle.setText(title);
         plaqueDesc.setText(description);
