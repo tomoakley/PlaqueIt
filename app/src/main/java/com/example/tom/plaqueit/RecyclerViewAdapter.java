@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -21,7 +20,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         RelativeLayout plaque_item;
         TextView plaqueTitle;
         TextView plaqueDesc;
-        Button plaqueButton;
+        // ImageView plaqueImage;
         TextView plaquePoints;
 
         /*
@@ -36,6 +35,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             plaqueTitle = (TextView) itemView.findViewById(R.id.plaque_title);
             plaqueDesc = (TextView) itemView.findViewById(R.id.plaque_description);
             plaquePoints = (TextView) itemView.findViewById(R.id.plaque_points);
+            // plaqueImage = (ImageView) itemView.findViewById(R.id.plaque_image);
 
             plaque_item.setOnClickListener(this);
         }

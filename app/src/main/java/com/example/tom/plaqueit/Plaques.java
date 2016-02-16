@@ -28,6 +28,7 @@ public class Plaques {
 
         String inscription = "";
         String subject = "";
+       //  String thumbnail = "";
         Double latitude = 0.0;
         Double longitude = 0.0;
 
@@ -47,7 +48,7 @@ public class Plaques {
                 try {
                     inscription = new String(cursor.getBlob(cursor.getColumnIndex(colInscription)), "UTF-8");
                     subject = new String(cursor.getBlob(cursor.getColumnIndex(colSubject)), "UTF-8");
-                    // String thumbnail = cursor.getString(cursor.getColumnIndex(colThumbnail));
+                    // thumbnail = new String(cursor.getBlob(cursor.getColumnIndex(colThumbnail)));
                     latitude = cursor.getDouble(cursor.getColumnIndex(colLatitude));
                     longitude = cursor.getDouble(cursor.getColumnIndex(colLongitude));
                 } catch (UnsupportedEncodingException e) {

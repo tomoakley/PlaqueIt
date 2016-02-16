@@ -2,9 +2,7 @@
     <string name="app_name">PlaqueIt</string>
     <string name="action_search_plaques">Search Plaques</string>
     <string name="action_change_location">Change Location</string>
+    <string name="action_login">Login</string>
     <string name="action_view_map">View Map</string>
     <string name="activity_child_name">Plaque Page</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
