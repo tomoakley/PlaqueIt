@@ -57,6 +57,6 @@ public class Plaques {
             } while (cursor.moveToNext());
         }
         cursor.close();
-        return new Plaque(subject, inscription, "20 points", latitude, longitude);
+        return new Plaque(id, subject, inscription, "20 points", latitude, longitude);
     }
 }

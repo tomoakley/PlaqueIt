@@ -1,5 +1,6 @@
 package com.example.tom.plaqueit;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,12 +18,26 @@ public class dashboard_view extends AppCompatActivity
         Map.OnFragmentInteractionListener {
 
     static ArrayList<Plaque> plaques;
+    Context context;
+    SessionManager session;
+    int userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard_view);
+
+        context = getApplicationContext();
+        session = new SessionManager(context);
+        userId = session.getUserId();
+
+        if (userId == 0) {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        }
+
+        System.out.println("dashboard_view Action ID is " + userId);
 
         Toolbar appBar = (Toolbar) findViewById(R.id.app_bar);
         ViewPager vPager = (ViewPager) findViewById(R.id.pager);
@@ -31,8 +46,6 @@ public class dashboard_view extends AppCompatActivity
         setSupportActionBar(appBar);
         vPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager(), getApplicationContext()));
         mTabs.setupWithViewPager(vPager);
-
-        // initializeData();
 
         Plaques plaqueList = new Plaques(this);
         plaques = new ArrayList<>();
@@ -44,6 +57,13 @@ public class dashboard_view extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_main_actions, menu);
+        if (userId > 0) {
+            menu.getItem(2).setVisible(false);
+            menu.getItem(3).setVisible(true);
+        } else {
+            menu.getItem(2).setVisible(true);
+            menu.getItem(3).setVisible(false);
+        }
         return super.onCreateOptionsMenu(menu);
     }
 

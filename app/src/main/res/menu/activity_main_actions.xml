@@ -16,4 +16,10 @@
         android:icon="@drawable/ic_lock_open"
         android:title="@string/action_login"
         app:showAsAction="ifRoom" />
+
+    <item android:id="@+id/action_profile"
+        android:icon="@drawable/ic_person"
+        android:title="@string/action_profile"
+        app:showAsAction="ifRoom"
+        android:visible="false"/>
 </menu>

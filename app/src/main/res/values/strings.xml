@@ -3,6 +3,7 @@
     <string name="action_search_plaques">Search Plaques</string>
     <string name="action_change_location">Change Location</string>
     <string name="action_login">Login</string>
+    <string name="action_profile">Profile</string>
     <string name="action_view_map">View Map</string>
     <string name="activity_child_name">Plaque Page</string>
 </resources>

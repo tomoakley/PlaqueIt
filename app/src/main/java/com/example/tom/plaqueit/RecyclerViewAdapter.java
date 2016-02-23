@@ -49,6 +49,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 Intent showPlaquePage = new Intent(currentContext, plaquePage.class);
 
                 int position = getAdapterPosition();
+                showPlaquePage.putExtra("id", plaques.get(position).id);
                 showPlaquePage.putExtra("title", plaques.get(position).title);
                 showPlaquePage.putExtra("description", plaques.get(position).description);
                 showPlaquePage.putExtra("points", plaques.get(position).points);

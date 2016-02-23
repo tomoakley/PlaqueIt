@@ -5,6 +5,7 @@ package com.example.tom.plaqueit;
  */
 public class Plaque {
 
+    int id;
     String title;
     String description;
     String points;
@@ -12,7 +13,8 @@ public class Plaque {
     Double latitude;
     Double longtitude;
 
-    Plaque(String title, String description, String points, Double latitude, Double longtitude) {
+    Plaque(int id, String title, String description, String points, Double latitude, Double longtitude) {
+        this.id = id;
         this.title = title;
         this.description = description;
         // this.thumbnailUrl = thumbnailUrl;

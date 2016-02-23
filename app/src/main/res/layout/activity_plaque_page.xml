@@ -62,11 +62,12 @@
             android:textColor="#FCBE17"
             android:layout_marginRight="150dp"/>
 
-        <ImageView
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageView4"
-            android:src="@drawable/ic_favorite"
+            android:id="@+id/favourite_btn"
+            android:src="@drawable/ic_favorite_outline"
+            android:background="#fff"
             android:layout_marginTop="5dp"/>
 
         <ImageView
