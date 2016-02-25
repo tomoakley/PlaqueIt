@@ -36,7 +36,7 @@ public class ItemList extends Fragment implements ItemFragment.OnFragmentInterac
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setNestedScrollingEnabled(true);
 
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(dashboard_view.plaques);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(Dashboard.plaques);
         recyclerView.setAdapter(adapter);
 
         return inflatedView;

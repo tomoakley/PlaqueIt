@@ -140,7 +140,7 @@ public class ClientServerInterface {
                 if (action.equals("checkemail")) {
                     LoginActivity.setLoginStatus(completedStatus);
                 } else if (action.equals("favourite") || action.equals("unfavourite")) {
-                    plaquePage.setFavourite(completedStatus);
+                    PlaquePage.setFavourite(completedStatus);
                 }
                 break;
             case "login": // methods which return int values

@@ -90,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
                                 if (loggedInID != 0) {
                                     System.out.println("userId = " + loggedInID);
                                     session.createUserSession(loggedInID);
-                                    Intent intent = new Intent(getApplicationContext(), dashboard_view.class);
+                                    Intent intent = new Intent(getApplicationContext(), Dashboard.class);
                                     startActivity(intent);
                                     Toast.makeText(LoginActivity.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
                                     stage = "loginSuccess";
@@ -115,7 +115,7 @@ public class LoginActivity extends AppCompatActivity {
         skipBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), dashboard_view.class);
+                Intent intent = new Intent(getApplicationContext(), Dashboard.class);
                 startActivity(intent);
                 Toast.makeText(LoginActivity.this, "Login skipped - some features may be unavailable", Toast.LENGTH_SHORT).show();
             }

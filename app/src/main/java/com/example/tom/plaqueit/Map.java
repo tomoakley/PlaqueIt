@@ -1,9 +1,7 @@
 package com.example.tom.plaqueit;
 
-import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,8 +59,8 @@ public class Map extends SupportMapFragment implements OnMapReadyCallback {
         plaqueMapData = (RelativeLayout) getView().findViewById(R.id.plaque_map_data);
         plaqueMapDesc = (TextView) getView().findViewById(R.id.map_location_desc);
 
-        // Get the data defined in the main activity (dashboard_view.java) and create map markers from it
-        com.example.tom.plaqueit.dashboard_view activity = (com.example.tom.plaqueit.dashboard_view) getActivity();
+        // Get the data defined in the main activity (Dashboard.java) and create map markers from it
+        Dashboard activity = (Dashboard) getActivity();
         plaques = activity.getPlaques();
         createMapPlaques(googleMap, plaques);
 

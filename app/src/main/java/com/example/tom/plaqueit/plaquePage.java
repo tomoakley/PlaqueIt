@@ -20,7 +20,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.HashMap;
 
-public class plaquePage extends AppCompatActivity {
+public class PlaquePage extends AppCompatActivity {
 
     Bundle bundle;
     int plaqueId;
@@ -100,7 +100,7 @@ public class plaquePage extends AppCompatActivity {
                     if (!favouriteStatus) {
                         serverInstance.getRequest("Plaque", "favourite", requestParameters);
                         if (favouriteStatus) {
-                            Toast.makeText(plaquePage.this, "Plaque favourited", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(PlaquePage.this, "Plaque favourited", Toast.LENGTH_SHORT).show();
                             favouriteBtn.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite, getTheme()));
                         }
                     } else {

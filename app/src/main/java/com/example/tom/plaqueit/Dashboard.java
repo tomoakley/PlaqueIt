@@ -13,7 +13,7 @@ import android.view.MenuItem;
 
 import java.util.ArrayList;
 
-public class dashboard_view extends AppCompatActivity
+public class Dashboard extends AppCompatActivity
         implements ItemList.OnFragmentInteractionListener, ItemFragment.OnFragmentInteractionListener,
         Map.OnFragmentInteractionListener {
 
@@ -37,7 +37,7 @@ public class dashboard_view extends AppCompatActivity
             startActivity(intent);
         }
 
-        System.out.println("dashboard_view Action ID is " + userId);
+        System.out.println("Dashboard Action ID is " + userId);
 
         Toolbar appBar = (Toolbar) findViewById(R.id.app_bar);
         ViewPager vPager = (ViewPager) findViewById(R.id.pager);

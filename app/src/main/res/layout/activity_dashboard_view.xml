@@ -10,7 +10,7 @@
     android:paddingLeft="0dp"
     android:paddingRight="0dp"
     android:paddingTop="0dp"
-    tools:context="com.example.tom.plaqueit.dashboard_view">
+    tools:context=".Dashboard">
     
     <android.support.design.widget.AppBarLayout
         android:id="@+id/toolbar"

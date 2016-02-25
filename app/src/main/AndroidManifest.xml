@@ -17,7 +17,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".dashboard_view">
+        <activity android:name=".Dashboard">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -25,9 +25,9 @@
         </activity>
         <activity android:name=".LoginActivity"></activity>
         <activity
-            android:name=".plaquePage"
+            android:name=".PlaquePage"
             android:label="@string/activity_child_name"
-            android:parentActivityName=".dashboard_view" />
+            android:parentActivityName=".Dashboard" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
