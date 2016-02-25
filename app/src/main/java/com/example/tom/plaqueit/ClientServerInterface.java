@@ -20,29 +20,24 @@ import okhttp3.Response;
  * Created by Tom on 07/02/16.
  */
 
-class UserLogin {
+class JsonObject {
     boolean status;
-}
-
-class Action {
     int id;
-    boolean status;
 }
 
 public class ClientServerInterface {
 
     OkHttpClient client = new OkHttpClient();
     private final ExecutorService pool = Executors.newFixedThreadPool(10);
-    boolean loginStatus;
     boolean completed;
     int actionID;
     boolean actionStatus;
 
     public void setStatus(boolean status) {
-        loginStatus = status;
+        actionStatus = status;
     }
     public boolean getStatus() {
-        return loginStatus;
+        return actionStatus;
     }
 
     public void setCompleted(boolean isCompleted) {
@@ -52,24 +47,17 @@ public class ClientServerInterface {
         return completed;
     }
 
-    public void setActionId(int actionid) {
+    public void setId(int actionid) {
         actionID = actionid;
     }
-    public int getActionId() {
+    public int getId() {
         return actionID;
     }
 
-    public void setActionStatus(boolean status) {
-        actionStatus = status;
-    }
-    public boolean getActionStatus() {
-        return actionStatus;
-    }
-
-    Future<Boolean> checkEmail(final Request request) throws IOException {
+    Future<Boolean> returnBoolean(final Request request) throws IOException {
         final Gson gson = new Gson();
         return pool.submit(new Callable<Boolean>() {
-            UserLogin login;
+            JsonObject json;
             @Override
             public Boolean call() throws Exception {
                 try {
@@ -83,8 +71,9 @@ public class ClientServerInterface {
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
                             setCompleted(false);
-                            login = gson.fromJson(response.body().charStream(), UserLogin.class);
-                            setStatus(login.status);
+                            System.out.println("response: " + response.body().charStream());
+                            json = gson.fromJson(response.body().charStream(), JsonObject.class);
+                            setStatus(json.status);
                             setCompleted(true);
                         }
                     });
@@ -99,10 +88,10 @@ public class ClientServerInterface {
         });
     }
 
-    Future<Integer> login(final Request request) throws IOException {
+    Future<Integer> returnInt(final Request request) throws IOException {
         final Gson gson = new Gson();
         return pool.submit(new Callable<Integer>() {
-            Action action;
+            JsonObject json;
             @Override
             public Integer call() throws Exception {
                 try {
@@ -116,8 +105,8 @@ public class ClientServerInterface {
                         @Override
                         public void onResponse(Call call, Response response) throws IOException {
                             setCompleted(false);
-                            action = gson.fromJson(response.body().charStream(), Action.class);
-                            setActionId(action.id);
+                            json = gson.fromJson(response.body().charStream(), JsonObject.class);
+                            setId(json.id);
                             setCompleted(true);
                         }
                     });
@@ -127,73 +116,8 @@ public class ClientServerInterface {
                 }
                 while (!getCompleted()) {
                 }
-                return getActionId();
-            }
-        });
-    }
-
-    Future<Integer> favourite(final Request request) throws IOException {
-        final Gson gson = new Gson();
-        return pool.submit(new Callable<Integer>() {
-            Action action;
-            @Override
-            public Integer call() throws Exception {
-                try {
-                    client.newCall(request).enqueue(new Callback() {
-                        @Override
-                        public void onFailure(Call call, IOException e) {
-                            setStatus(false);
-                            e.printStackTrace();
-                        }
-
-                        @Override
-                        public void onResponse(Call call, Response response) throws IOException {
-                            setCompleted(false);
-                            action = gson.fromJson(response.body().charStream(), Action.class);
-                            setActionId(action.id);
-                            setCompleted(true);
-                        }
-                    });
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    setStatus(false);
-                }
-                while (!getCompleted()) {
-                }
-                return getActionId();
-            }
-        });
-    }
-
-    Future<Boolean> unfavourite(final Request request) throws IOException {
-        final Gson gson = new Gson();
-        return pool.submit(new Callable<Boolean>() {
-            Action action;
-            @Override
-            public Boolean call() throws Exception {
-                try {
-                    client.newCall(request).enqueue(new Callback() {
-                        @Override
-                        public void onFailure(Call call, IOException e) {
-                            setStatus(false);
-                            e.printStackTrace();
-                        }
-
-                        @Override
-                        public void onResponse(Call call, Response response) throws IOException {
-                            setCompleted(false);
-                            action = gson.fromJson(response.body().charStream(), Action.class);
-                            setActionStatus(action.status);
-                            setCompleted(true);
-                        }
-                    });
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    setStatus(false);
-                }
-                while (!getCompleted()) {
-                }
-                return getActionStatus();
+                System.out.println("callback method: " + getId());
+                return getId();
             }
         });
     }
@@ -210,26 +134,20 @@ public class ClientServerInterface {
                 .url(stringUrl)
                 .build();
         switch (action) {
-            case "checkemail":
-                Future<Boolean> futureLoginStatus = checkEmail(request);
-                boolean completedLoginStatus = futureLoginStatus.get();
-                LoginActivity.setLoginStatus(completedLoginStatus);
+            case "checkemail": case "favourite": case "unfavourite": // methods which return boolean values
+                Future<Boolean> futureStatus = returnBoolean(request);
+                boolean completedStatus = futureStatus.get();
+                if (action.equals("checkemail")) {
+                    LoginActivity.setLoginStatus(completedStatus);
+                } else if (action.equals("favourite") || action.equals("unfavourite")) {
+                    plaquePage.setFavourite(completedStatus);
+                }
                 break;
-            case "login":
-                Future<Integer> futureUserId = login(request);
-                int completeUserId = futureUserId.get();
-                LoginActivity.setUserId(completeUserId);
-                break;
-            case "favourite":
-                Future<Integer> futureFavouriteId = favourite(request);
-                int completeFavouriteId = futureFavouriteId.get();
-                plaquePage.setFavourite(completeFavouriteId);
-                break;
-            case "unfavourite":
-                Future<Boolean> futureFavouriteStatus = unfavourite(request);
-                boolean completeFavouriteStatus = futureFavouriteStatus.get();
-                System.out.println("favouriteStatus is now " + completeFavouriteStatus);
-                plaquePage.setFavourite(completeFavouriteStatus);
+            case "login": // methods which return int values
+                Future<Integer> futureId = returnInt(request);
+                int completeId = futureId.get();
+                System.out.println("completeId: " + completeId);
+                LoginActivity.setUserId(completeId);
                 break;
             default:
                 break;

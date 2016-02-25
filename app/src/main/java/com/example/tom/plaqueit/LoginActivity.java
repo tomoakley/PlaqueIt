@@ -127,7 +127,7 @@ public class LoginActivity extends AppCompatActivity {
         boolean response = false;
         requestParameters.put("email", emailValue);
         try {
-            serverInstance.getRequest("Action", "checkemail", requestParameters);
+            serverInstance.getRequest("User", "checkemail", requestParameters);
             response = getLoginStatus();
         } catch (Exception e) {
             e.printStackTrace();
@@ -137,10 +137,11 @@ public class LoginActivity extends AppCompatActivity {
 
     public int checkPassword(String emailValue) {
         ClientServerInterface serverInstance = new ClientServerInterface();
-        int userID = 1;
+        int userID = 0;
         requestParameters.put("email", emailValue);
         try {
-            serverInstance.getRequest("Action", "login", requestParameters);
+            serverInstance.getRequest("User", "login", requestParameters);
+            System.out.println("checkPassword: " + getUserId());
             userID = getUserId();
         } catch (Exception e) {
             e.printStackTrace();
