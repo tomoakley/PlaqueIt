@@ -47,10 +47,10 @@ public class Dashboard extends AppCompatActivity
         vPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager(), getApplicationContext()));
         mTabs.setupWithViewPager(vPager);
 
-        Plaques plaqueList = new Plaques(this);
+        Plaque.setDatabase(this);
         plaques = new ArrayList<>();
         for (int i = 1; i < 20; i++) {
-            plaques.add(plaqueList.getPlaqueByID(i));
+            plaques.add(Plaque.getPlaqueByID(i));
         }
     }
 
