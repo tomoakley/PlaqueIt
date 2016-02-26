@@ -39,6 +39,8 @@ public class PlaquePage extends AppCompatActivity {
     static boolean favouriteStatus = false;
     SessionManager session;
     Context context;
+    ClientServerInterface serverInstance;
+    HashMap<String, String> requestParameters;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +66,11 @@ public class PlaquePage extends AppCompatActivity {
         favouriteBtn = (ImageButton) findViewById(R.id.favourite_btn);
         map = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 
+        serverInstance = new ClientServerInterface();
+        requestParameters = new HashMap<>();
+        requestParameters.put("userid", Integer.toString(userId));
+        requestParameters.put("plaqueid", Integer.toString(plaqueId));
+
         setSupportActionBar(appBar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -72,6 +79,15 @@ public class PlaquePage extends AppCompatActivity {
         plaqueTitle.setText(title);
         plaqueDesc.setText(description);
         plaquePoints.setText(points);
+
+        try {
+            serverInstance.getRequest("Plaque", "checkfavourite", requestParameters);
+            if (favouriteStatus) {
+                favouriteBtn.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite, getTheme()));
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
 
         map.getMapAsync(new OnMapReadyCallback() {
             @Override
@@ -92,22 +108,22 @@ public class PlaquePage extends AppCompatActivity {
         favouriteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ClientServerInterface serverInstance = new ClientServerInterface();
-                HashMap<String, String> requestParameters = new HashMap<>();
-                requestParameters.put("userid", Integer.toString(userId));
-                requestParameters.put("plaqueid", Integer.toString(plaqueId));
                 try {
                     if (!favouriteStatus) {
                         serverInstance.getRequest("Plaque", "favourite", requestParameters);
+                        favouriteBtn.setClickable(false);
                         if (favouriteStatus) {
                             Toast.makeText(PlaquePage.this, "Plaque favourited", Toast.LENGTH_SHORT).show();
                             favouriteBtn.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite, getTheme()));
                         }
+                        favouriteBtn.setClickable(true);
                     } else {
                         serverInstance.getRequest("Plaque", "unfavourite", requestParameters);
+                        favouriteBtn.setClickable(false);
                         if (!favouriteStatus) {
                             favouriteBtn.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite_outline, getTheme()));
                         }
+                        favouriteBtn.setClickable(true);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -115,13 +131,6 @@ public class PlaquePage extends AppCompatActivity {
 
             }
         });
-    }
-
-    public static void setFavourite(int id) {
-        if (id > 0) {
-            System.out.println("favouriteStatus " + favouriteStatus);
-            favouriteStatus = true;
-        }
     }
 
     public static void setFavourite(boolean status) {

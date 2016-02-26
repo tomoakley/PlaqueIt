@@ -134,12 +134,12 @@ public class ClientServerInterface {
                 .url(stringUrl)
                 .build();
         switch (action) {
-            case "checkemail": case "favourite": case "unfavourite": // methods which return boolean values
+            case "checkemail": case "favourite": case "unfavourite":case "checkfavourite": // methods which return boolean values
                 Future<Boolean> futureStatus = returnBoolean(request);
                 boolean completedStatus = futureStatus.get();
                 if (action.equals("checkemail")) {
                     LoginActivity.setLoginStatus(completedStatus);
-                } else if (action.equals("favourite") || action.equals("unfavourite")) {
+                } else if (action.equals("favourite") || action.equals("unfavourite") || action.equals("checkfavourite")) {
                     PlaquePage.setFavourite(completedStatus);
                 }
                 break;
