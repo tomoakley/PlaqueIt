@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,11 +22,10 @@ import android.view.ViewGroup;
 public class ItemList extends Fragment implements ItemFragment.OnFragmentInteractionListener {
 
     private OnFragmentInteractionListener mListener;
+    ArrayList<Plaque> plaques = new ArrayList<>();
 
     public ItemList() {
-        // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,7 +37,9 @@ public class ItemList extends Fragment implements ItemFragment.OnFragmentInterac
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setNestedScrollingEnabled(true);
 
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(Dashboard.plaques);
+        plaques = (ArrayList<Plaque>) getArguments().getSerializable("plaques");
+
+        PlaqueRecyclerView adapter = new PlaqueRecyclerView(plaques);
         recyclerView.setAdapter(adapter);
 
         return inflatedView;

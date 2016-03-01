@@ -1,29 +1,39 @@
 package com.example.tom.plaqueit;
 
-import android.content.Context;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+
+import java.util.ArrayList;
 
 /**
  * Created by Tom on 07/12/2015.
  */
 
-class MyPagerAdapter extends FragmentPagerAdapter {
+class DashboardPagerAdapter extends FragmentPagerAdapter {
 
     private String fragments[] = {"List", "Map"};
+    ArrayList<Plaque> plaques = new ArrayList<>();
 
-    public MyPagerAdapter(FragmentManager fm, Context context) {
+    public DashboardPagerAdapter(FragmentManager fm, ArrayList<Plaque> plaques) {
         super(fm);
+        this.plaques = plaques;
     }
 
     @Override
     public Fragment getItem(int position) {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("plaques", plaques);
         switch (position) {
             case 0:
-                return new ItemList();
+                ItemList list = new ItemList();
+                list.setArguments(bundle);
+                return list;
             case 1:
-                return new Map();
+                Map map = new Map();
+                map.setArguments(bundle);
+                return map;
             default:
                 return new Map();
         }

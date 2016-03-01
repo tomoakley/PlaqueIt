@@ -59,9 +59,7 @@ public class Map extends SupportMapFragment implements OnMapReadyCallback {
         plaqueMapData = (RelativeLayout) getView().findViewById(R.id.plaque_map_data);
         plaqueMapDesc = (TextView) getView().findViewById(R.id.map_location_desc);
 
-        // Get the data defined in the main activity (Dashboard.java) and create map markers from it
-        Dashboard activity = (Dashboard) getActivity();
-        plaques = activity.getPlaques();
+        plaques = (ArrayList<Plaque>) getArguments().getSerializable("plaques");
         createMapPlaques(googleMap, plaques);
 
         // Build camera position

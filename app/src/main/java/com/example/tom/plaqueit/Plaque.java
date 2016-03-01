@@ -4,12 +4,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 
 /**
  * Created by Tom on 08/12/2015.
  */
-public class Plaque {
+public class Plaque implements Serializable {
 
     int id;
     String title;

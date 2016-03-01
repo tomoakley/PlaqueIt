@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Created by Tom on 08/12/2015.
  */
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.PlaqueViewHolder> {
+public class PlaqueRecyclerView extends RecyclerView.Adapter<PlaqueRecyclerView.PlaqueViewHolder> {
 
     class PlaqueViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         RelativeLayout plaque_item;
@@ -63,7 +63,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     List<Plaque> plaques;
 
-    RecyclerViewAdapter(List<Plaque> plaques) {
+    PlaqueRecyclerView(List<Plaque> plaques) {
         this.plaques = plaques;
     }
 

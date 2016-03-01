@@ -3,6 +3,7 @@ package com.example.tom.plaqueit;
 import com.google.gson.Gson;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
@@ -23,6 +24,7 @@ import okhttp3.Response;
 class JsonObject {
     boolean status;
     int id;
+    ArrayList list;
 }
 
 public class ClientServerInterface {
@@ -32,12 +34,21 @@ public class ClientServerInterface {
     boolean completed;
     int actionID;
     boolean actionStatus;
+    ArrayList listObject;
 
     public void setStatus(boolean status) {
         actionStatus = status;
     }
     public boolean getStatus() {
         return actionStatus;
+    }
+
+    public void setList(ArrayList list) {
+        listObject = list;
+    }
+
+    public ArrayList getList() {
+        return listObject;
     }
 
     public void setCompleted(boolean isCompleted) {
@@ -122,6 +133,40 @@ public class ClientServerInterface {
         });
     }
 
+    Future<ArrayList> returnList(final Request request) throws IOException {
+        final Gson gson = new Gson();
+        return pool.submit(new Callable<ArrayList>() {
+            JsonObject json;
+            @Override
+            public ArrayList call() throws Exception {
+                try {
+                    client.newCall(request).enqueue(new Callback() {
+                        @Override
+                        public void onFailure(Call call, IOException e) {
+                            setStatus(false);
+                            e.printStackTrace();
+                        }
+
+                        @Override
+                        public void onResponse(Call call, Response response) throws IOException {
+                            setCompleted(false);
+                            json = gson.fromJson(response.body().charStream(), JsonObject.class);
+                            setList(json.list);
+                            setCompleted(true);
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    setStatus(false);
+                }
+                while (!getCompleted()) {
+                }
+                System.out.println("callback method: " + getId());
+                return getList();
+            }
+        });
+    }
+
     void getRequest(String servlet, String action, HashMap<String, String> parameters) throws Exception {
         HttpUrl.Builder urlBuilder = HttpUrl.parse("http://134.83.83.25:47313/tom/" + servlet).newBuilder();
         urlBuilder.addQueryParameter("action", action);
@@ -149,6 +194,11 @@ public class ClientServerInterface {
                 System.out.println("completeId: " + completeId);
                 LoginActivity.setUserId(completeId);
                 break;
+            case "getfavourites":
+                Future<ArrayList> futureList = returnList(request);
+                ArrayList completeList = futureList.get();
+                System.out.println("completeList: " + completeList);
+                Profile.setFavouritePlaques(completeList);
             default:
                 break;
         }

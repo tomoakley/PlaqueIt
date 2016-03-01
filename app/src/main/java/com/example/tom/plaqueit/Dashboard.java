@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 public class Dashboard extends AppCompatActivity
         implements ItemList.OnFragmentInteractionListener, ItemFragment.OnFragmentInteractionListener,
@@ -30,6 +31,13 @@ public class Dashboard extends AppCompatActivity
 
         context = getApplicationContext();
         session = new SessionManager(context);
+        try {
+            session.createUserSession(1);
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         userId = session.getUserId();
 
         if (userId == 0) {
@@ -37,21 +45,19 @@ public class Dashboard extends AppCompatActivity
             startActivity(intent);
         }
 
-        System.out.println("Dashboard Action ID is " + userId);
-
         Toolbar appBar = (Toolbar) findViewById(R.id.app_bar);
         ViewPager vPager = (ViewPager) findViewById(R.id.pager);
         TabLayout mTabs = (TabLayout) findViewById(R.id.tabs);
-
-        setSupportActionBar(appBar);
-        vPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager(), getApplicationContext()));
-        mTabs.setupWithViewPager(vPager);
 
         Plaque.setDatabase(this);
         plaques = new ArrayList<>();
         for (int i = 1; i < 20; i++) {
             plaques.add(Plaque.getPlaqueByID(i));
         }
+
+        setSupportActionBar(appBar);
+        vPager.setAdapter(new DashboardPagerAdapter(getSupportFragmentManager(), plaques));
+        mTabs.setupWithViewPager(vPager);
     }
 
     @Override
@@ -73,6 +79,9 @@ public class Dashboard extends AppCompatActivity
                 Intent intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
                 return true;
+            case R.id.action_profile:
+                intent = new Intent(this, Profile.class);
+                startActivity(intent);
             default:
                 return super.onOptionsItemSelected(item);
         }
